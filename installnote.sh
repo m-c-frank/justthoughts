@@ -8,7 +8,7 @@ sed -i "s|REPO_DIR=.*|REPO_DIR=$1|" createnote.sh
 
 # Adding createnote.sh to the user's path
 chmod +x createnote.sh
-ln -s "$(pwd)/createnote.sh" "~/.local/bin/createnote"
+ln -s "$(pwd)/createnote.sh" "$HOME/.local/bin/createnote"
 
 echo "Setup complete. Use 'createnote' to create a new note."
 
