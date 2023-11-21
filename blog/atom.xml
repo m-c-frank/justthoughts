@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://your-docusaurus-site.example.com/blog</id>
-    <title>My Site Blog</title>
+    <id>https://justthoughts.xyz/blog</id>
+    <title>justthoughts Blog</title>
     <updated>2023-11-21T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://your-docusaurus-site.example.com/blog"/>
-    <subtitle>My Site Blog</subtitle>
-    <icon>https://your-docusaurus-site.example.com/img/favicon.ico</icon>
+    <link rel="alternate" href="https://justthoughts.xyz/blog"/>
+    <subtitle>justthoughts Blog</subtitle>
+    <icon>https://justthoughts.xyz/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[New Note 2023-11-21 07:45:00]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/2023/11/21/07-45-00-note</id>
-        <link href="https://your-docusaurus-site.example.com/blog/2023/11/21/07-45-00-note"/>
+        <id>https://justthoughts.xyz/blog/2023/11/21/07-45-00-note</id>
+        <link href="https://justthoughts.xyz/blog/2023/11/21/07-45-00-note"/>
         <updated>2023-11-21T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[good morning]]></summary>
         <content type="html"><![CDATA[<p>good morning</p>
@@ -25,8 +25,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Custom Domain for GitHub Pages]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/2023/11/21/07-50-40-note</id>
-        <link href="https://your-docusaurus-site.example.com/blog/2023/11/21/07-50-40-note"/>
+        <id>https://justthoughts.xyz/blog/2023/11/21/07-50-40-note</id>
+        <link href="https://justthoughts.xyz/blog/2023/11/21/07-50-40-note"/>
         <updated>2023-11-21T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[in most cases you probably mean to set an apex domain to be the one that presents the github page.]]></summary>
         <content type="html"><![CDATA[<p>in most cases you probably mean to set an apex domain to be the one that presents the github page.</p>
@@ -45,7 +45,7 @@ so to keep it short just create new records with the following content:</li>
 <table><thead><tr><th>Record Type</th><th>Domain</th><th>IP Address</th><th>Settings</th></tr></thead><tbody><tr><td>A Record</td><td>@</td><td>185.199.108.153</td><td>Automatic</td></tr><tr><td>A Record</td><td>@</td><td>185.199.111.153</td><td>Automatic</td></tr><tr><td>A Record</td><td>@</td><td>185.199.109.153</td><td>Automatic</td></tr><tr><td>A Record</td><td>@</td><td>185.199.110.153</td><td>Automatic</td></tr><tr><td>CNAME Record</td><td>*</td><td>m-c-frank.github.io</td><td>Automatic</td></tr></tbody></table>
 <p>then in the github project you have to manually enter the domain name you want to use</p>
 <p>and i would suggest setting the enforce https option</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-things-to-do-now">new things to do now:<a href="https://your-docusaurus-site.example.com/blog/2023/11/21/07-50-40-note#new-things-to-do-now" class="hash-link" aria-label="Direct link to new things to do now:" title="Direct link to new things to do now:">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-things-to-do-now">new things to do now:<a href="https://justthoughts.xyz/blog/2023/11/21/07-50-40-note#new-things-to-do-now" class="hash-link" aria-label="Direct link to new things to do now:" title="Direct link to new things to do now:">​</a></h2>
 <ul>
 <li>learn about dns and how to test this</li>
 <li>write the script that does this setup automatically</li>
@@ -65,8 +65,8 @@ so to keep it short just create new records with the following content:</li>
     </entry>
     <entry>
         <title type="html"><![CDATA[New Note 2023-11-21 17:51:50]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/2023/11/21/17-51-50-note</id>
-        <link href="https://your-docusaurus-site.example.com/blog/2023/11/21/17-51-50-note"/>
+        <id>https://justthoughts.xyz/blog/2023/11/21/17-51-50-note</id>
+        <link href="https://justthoughts.xyz/blog/2023/11/21/17-51-50-note"/>
         <updated>2023-11-21T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[if you intend to deploy the github page on the apex domain then you dont have to change the baseurl to anything]]></summary>
         <content type="html"><![CDATA[<p>if you intend to deploy the github page on the apex domain then you dont have to change the baseurl to anything</p>
@@ -80,8 +80,8 @@ so to keep it short just create new records with the following content:</li>
     </entry>
     <entry>
         <title type="html"><![CDATA[New Note 2023-11-20 21:13:00]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/2023/11/20/21-13-00-note</id>
-        <link href="https://your-docusaurus-site.example.com/blog/2023/11/20/21-13-00-note"/>
+        <id>https://justthoughts.xyz/blog/2023/11/20/21-13-00-note</id>
+        <link href="https://justthoughts.xyz/blog/2023/11/20/21-13-00-note"/>
         <updated>2023-11-20T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[i will create a system that publishes simple notes.]]></summary>
         <content type="html"><![CDATA[<p>i will create a system that publishes simple notes.
@@ -115,8 +115,8 @@ help people define what their problems are</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/welcome</id>
-        <link href="https://your-docusaurus-site.example.com/blog/welcome"/>
+        <id>https://justthoughts.xyz/blog/welcome</id>
+        <link href="https://justthoughts.xyz/blog/welcome"/>
         <updated>2021-08-26T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Docusaurus blogging features are powered by the blog plugin.]]></summary>
         <content type="html"><![CDATA[<p><a href="https://docusaurus.io/docs/blog" target="_blank" rel="noopener noreferrer">Docusaurus blogging features</a> are powered by the <a href="https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog" target="_blank" rel="noopener noreferrer">blog plugin</a>.</p>
@@ -128,7 +128,7 @@ help people define what their problems are</p>
 <li><code>2019-05-30-welcome/index.md</code></li>
 </ul>
 <p>A blog post folder can be convenient to co-locate blog post images:</p>
-<p><img loading="lazy" alt="Docusaurus Plushie" src="https://your-docusaurus-site.example.com/assets/images/docusaurus-plushie-banner-a60f7593abca1e3eef26a9afa244e4fb.jpeg" width="1500" height="500" class="img_ev3q"></p>
+<p><img loading="lazy" alt="Docusaurus Plushie" src="https://justthoughts.xyz/assets/images/docusaurus-plushie-banner-a60f7593abca1e3eef26a9afa244e4fb.jpeg" width="1500" height="500" class="img_ev3q"></p>
 <p>The blog supports tags as well!</p>
 <p><strong>And if you don't want a blog</strong>: just delete this directory, and use <code>blog: false</code> in your Docusaurus config.</p>]]></content>
         <author>
@@ -145,8 +145,8 @@ help people define what their problems are</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[MDX Blog Post]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/mdx-blog-post</id>
-        <link href="https://your-docusaurus-site.example.com/blog/mdx-blog-post"/>
+        <id>https://justthoughts.xyz/blog/mdx-blog-post</id>
+        <link href="https://justthoughts.xyz/blog/mdx-blog-post"/>
         <updated>2021-08-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Blog posts support Docusaurus Markdown features, such as MDX.]]></summary>
         <content type="html"><![CDATA[<p>Blog posts support <a href="https://docusaurus.io/docs/markdown-features" target="_blank" rel="noopener noreferrer">Docusaurus Markdown features</a>, such as <a href="https://mdxjs.com/" target="_blank" rel="noopener noreferrer">MDX</a>.</p>
@@ -159,8 +159,8 @@ help people define what their problems are</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Long Blog Post]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/long-blog-post</id>
-        <link href="https://your-docusaurus-site.example.com/blog/long-blog-post"/>
+        <id>https://justthoughts.xyz/blog/long-blog-post</id>
+        <link href="https://justthoughts.xyz/blog/long-blog-post"/>
         <updated>2019-05-29T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[This is the summary of a very long blog post,]]></summary>
         <content type="html"><![CDATA[<p>This is the summary of a very long blog post,</p>
@@ -190,8 +190,8 @@ help people define what their problems are</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[First Blog Post]]></title>
-        <id>https://your-docusaurus-site.example.com/blog/first-blog-post</id>
-        <link href="https://your-docusaurus-site.example.com/blog/first-blog-post"/>
+        <id>https://justthoughts.xyz/blog/first-blog-post</id>
+        <link href="https://justthoughts.xyz/blog/first-blog-post"/>
         <updated>2019-05-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet]]></summary>
         <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content>
