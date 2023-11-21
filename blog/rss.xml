@@ -21,6 +21,42 @@
             <category>note</category>
         </item>
         <item>
+            <title><![CDATA[Custom Domain for GitHub Pages]]></title>
+            <link>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/21/07-50-40-note</link>
+            <guid>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/21/07-50-40-note</guid>
+            <pubDate>Tue, 21 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[in most cases you probably mean to set an apex domain to be the one that presents the github page.]]></description>
+            <content:encoded><![CDATA[<p>in most cases you probably mean to set an apex domain to be the one that presents the github page.</p>
+<p>the apex domain is just literally your subdomain.domain.topleveldomain without the subdomain part.</p>
+<p>i.e. justthoughts.xyz in my case</p>
+<p>to do that you need to configure the dns settings.</p>
+<p>i am using namecheap so i have to add the following:</p>
+<ol>
+<li>as of today you can use this url template and replace the domain with yours:
+-&gt; <a href="https://ap.www.namecheap.com/Domains/DomainControlPanel/YOURDOMAIN.TLD/advancedns" target="_blank" rel="noopener noreferrer">https://ap.www.namecheap.com/Domains/DomainControlPanel/YOURDOMAIN.TLD/advancedns</a>
+-&gt; remember the ".tld" is just the .com or .xyz or .io, aka top level domain</li>
+<li>then just delete all dns settings in the host records section. we will learn it from the ground up
+-&gt; now we need to add new records and you can find even more information directly at the <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#dns-records-for-your-custom-domain" target="_blank" rel="noopener noreferrer">github documentation on configuring the records</a>
+so to keep it short just create new records with the following content:</li>
+</ol>
+<table><thead><tr><th>Record Type</th><th>Domain</th><th>IP Address</th><th>Settings</th></tr></thead><tbody><tr><td>A Record</td><td>@</td><td>185.199.108.153</td><td>Automatic</td></tr><tr><td>A Record</td><td>@</td><td>185.199.111.153</td><td>Automatic</td></tr><tr><td>A Record</td><td>@</td><td>185.199.109.153</td><td>Automatic</td></tr><tr><td>A Record</td><td>@</td><td>185.199.110.153</td><td>Automatic</td></tr><tr><td>CNAME Record</td><td>*</td><td>m-c-frank.github.io</td><td>Automatic</td></tr></tbody></table>
+<p>then in the github project you have to manually enter the domain name you want to use</p>
+<p>and i would suggest setting the enforce https option</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-things-to-do-now">new things to do now:<a href="https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/21/07-50-40-note#new-things-to-do-now" class="hash-link" aria-label="Direct link to new things to do now:" title="Direct link to new things to do now:">​</a></h2>
+<ul>
+<li>learn about dns and how to test this</li>
+<li>write the script that does this setup automatically</li>
+<li>learn more about the <code>dig</code> command</li>
+<li>verifying custom domain for github pages -&gt; MOST IMPORTANT TO MAKE LIFE EASY</li>
+</ul>]]></content:encoded>
+            <category>note</category>
+            <category>namecheap</category>
+            <category>domain</category>
+            <category>custom</category>
+            <category>github</category>
+            <category>pages</category>
+        </item>
+        <item>
             <title><![CDATA[New Note 2023-11-20 21:13:00]]></title>
             <link>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/20/21-13-00-note</link>
             <guid>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/20/21-13-00-note</guid>
