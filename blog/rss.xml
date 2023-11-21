@@ -4,10 +4,22 @@
         <title>My Site Blog</title>
         <link>https://your-docusaurus-site.example.com/blog</link>
         <description>My Site Blog</description>
-        <lastBuildDate>Mon, 20 Nov 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 21 Nov 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[New Note 2023-11-21 07:45:00]]></title>
+            <link>https://your-docusaurus-site.example.com/blog/2023/11/21/07-45-00-note</link>
+            <guid>https://your-docusaurus-site.example.com/blog/2023/11/21/07-45-00-note</guid>
+            <pubDate>Tue, 21 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[good morning]]></description>
+            <content:encoded><![CDATA[<p>good morning</p>
+<p>i've added a few new issues. im hoping that i will soon find an easy way to import them into this website</p>
+<p>so i can more easily integrate my ideas in just this one place where everything is in a very nice structure!</p>
+<p>but sometimes you just need a little chaos to really thrive.</p>]]></content:encoded>
+            <category>note</category>
+        </item>
         <item>
             <title><![CDATA[New Note 2023-11-20 21:13:00]]></title>
             <link>https://your-docusaurus-site.example.com/blog/2023/11/20/21-13-00-note</link>

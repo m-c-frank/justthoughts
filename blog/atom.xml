@@ -2,11 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://your-docusaurus-site.example.com/blog</id>
     <title>My Site Blog</title>
-    <updated>2023-11-20T00:00:00.000Z</updated>
+    <updated>2023-11-21T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://your-docusaurus-site.example.com/blog"/>
     <subtitle>My Site Blog</subtitle>
     <icon>https://your-docusaurus-site.example.com/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[New Note 2023-11-21 07:45:00]]></title>
+        <id>https://your-docusaurus-site.example.com/blog/2023/11/21/07-45-00-note</id>
+        <link href="https://your-docusaurus-site.example.com/blog/2023/11/21/07-45-00-note"/>
+        <updated>2023-11-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[good morning]]></summary>
+        <content type="html"><![CDATA[<p>good morning</p>
+<p>i've added a few new issues. im hoping that i will soon find an easy way to import them into this website</p>
+<p>so i can more easily integrate my ideas in just this one place where everything is in a very nice structure!</p>
+<p>but sometimes you just need a little chaos to really thrive.</p>]]></content>
+        <author>
+            <name>Martin Christoph Frank</name>
+            <uri>https://github.com/m-c-frank</uri>
+        </author>
+        <category label="note" term="note"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[New Note 2023-11-20 21:13:00]]></title>
         <id>https://your-docusaurus-site.example.com/blog/2023/11/20/21-13-00-note</id>
