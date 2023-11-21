@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjustthoughts=self.webpackChunkjustthoughts||[]).push([[2613],{7143:t=>{t.exports=JSON.parse('{"permalink":"/justthoughts/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
