@@ -57,6 +57,17 @@ so to keep it short just create new records with the following content:</li>
             <category>pages</category>
         </item>
         <item>
+            <title><![CDATA[New Note 2023-11-21 17:51:50]]></title>
+            <link>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/21/17-51-50-note</link>
+            <guid>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/21/17-51-50-note</guid>
+            <pubDate>Tue, 21 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[if you intend to deploy the github page on the apex domain then you dont have to change the baseurl to anything]]></description>
+            <content:encoded><![CDATA[<p>if you intend to deploy the github page on the apex domain then you dont have to change the baseurl to anything</p>
+<p>just leave it at "/" instead of "/justthoughts/" in my case. you can look at issue #7 or the connected pull request</p>
+<p>now i will revert the pr and change it back to just "/" but this was a nice learning expericenec!</p>]]></content:encoded>
+            <category>note</category>
+        </item>
+        <item>
             <title><![CDATA[New Note 2023-11-20 21:13:00]]></title>
             <link>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/20/21-13-00-note</link>
             <guid>https://your-docusaurus-site.example.com/justthoughts/blog/2023/11/20/21-13-00-note</guid>
