@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjustthoughts=self.webpackChunkjustthoughts||[]).push([[1277],{7749:s=>{s.exports=JSON.parse('{"label":"kickoff","permalink":"/justthoughts/blog/tags/kickoff","allTagsPath":"/justthoughts/blog/tags","count":1,"unlisted":false}')}}]);
