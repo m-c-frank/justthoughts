@@ -7,11 +7,20 @@ on:
 jobs:
   generate-blog-post:
     runs-on: ubuntu-latest
+    env:
+      ISSUE_TITLE: ${{ github.event.issue.title }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      BRANCH_NAME: "${{ github.event.issue.number }}-issueblogger" 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
       with:
         submodules: true
+
+    - name: Update Submodules to Latest Commit on Specified Branch
+      run: |
+        git submodule update --init --recursive
+        git submodule foreach --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; git pull origin $branch'
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -19,30 +28,26 @@ jobs:
         python-version: '3.x'
 
     - name: Install Dependencies
-      run: |
-        pip install langchain
+      run: pip install langchain
 
     - name: Generate Content
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        ISSUE_TITLE: ${{ github.event.issue.title }}
-        ISSUE_NUMBER: ${{ github.event.issue.number }}
-      run: |
-        python scripts/issueblogger.py "$ISSUE_TITLE" "$ISSUE_NUMBER"
+      run: python scripts/issueblogger.py "$ISSUE_TITLE" "$ISSUE_NUMBER"
 
-    - name: Commit and Push
+    - name: Commit and Push Changes
       run: |
         git config user.name 'github-actions'
         git config user.email 'github-actions@github.com'
-        git add ./blog/${{ github.event.issue.number }}-new-post.md
-        git commit -m "Add new blog post"
+        git add ./blog/${ISSUE_NUMBER}-new-post.md
+        git commit -m "Add new blog post for issue #${ISSUE_NUMBER}"
         git push
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Add new blog post"
-        title: "New Blog Post"
-        branch: "issue-${{ github.event.issue.number }}"
+        commit-message: "Add new blog post for issue #${ISSUE_NUMBER}"
+        title: "Blog Post: $ISSUE_NUMBER - $ISSUE_TITLE"
+        branch: $BRANCH_NAME
 
