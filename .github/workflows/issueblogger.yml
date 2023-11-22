@@ -1,4 +1,4 @@
-name: Issue Blogger
+name: issueblogger
 
 on:
   issues:
@@ -22,18 +22,13 @@ jobs:
         git submodule update --init --recursive
         git submodule foreach --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; git pull origin $branch'
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install Dependencies
-      run: pip install langchain
+    - name: Build Docker Image
+      run: docker build -t issueblogger ./scripts
 
     - name: Generate Content
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      run: python scripts/issueblogger.py "$ISSUE_TITLE" "$ISSUE_NUMBER"
+      run: docker run --rm -e OPENAI_API_KEY issueblogger python scripts/issueblogger.py "$ISSUE_TITLE" "$ISSUE_NUMBER"
 
     - name: Commit and Push Changes
       run: |
@@ -50,4 +45,3 @@ jobs:
         commit-message: "Add new blog post for issue #${ISSUE_NUMBER}"
         title: "Blog Post: $ISSUE_NUMBER - $ISSUE_TITLE"
         branch: $BRANCH_NAME
-
