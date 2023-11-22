@@ -8,10 +8,10 @@ jobs:
   generate-blog-post:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository and Submodules
+    - name: Checkout Repository
       uses: actions/checkout@v2
       with:
-        submodules: 'recursive'
+        submodules: true
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -45,3 +45,4 @@ jobs:
         commit-message: "Add new blog post"
         title: "New Blog Post"
         branch: "issue-${{ github.event.issue.number }}"
+
