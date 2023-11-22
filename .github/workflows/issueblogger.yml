@@ -23,7 +23,7 @@ jobs:
         git submodule foreach --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; git pull origin $branch'
 
     - name: Build Docker Image
-      run: docker build -t issueblogger .
+      run: docker build -t issueblogger -f scripts/Dockerfile .
 
     - name: Generate Content
       env:
