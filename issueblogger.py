@@ -2,15 +2,13 @@ import os
 import sys
 from datetime import datetime
 from langchain.llms import OpenAI
-from langchain.chains import Chain
-from langchain.postprocessors import LengthLimiter
+from langchain.lcel import LCEL  # Import LCEL
 
 def generate_blog_post(issue_title, issue_number, api_key):
     llm = OpenAI(api_key)
-    chain = Chain([llm], postprocessors=[LengthLimiter(840)])  # Limit to ~840 characters
+    lcel = LCEL(llm=llm)
 
-    initial_prompt = f"Explain the topic '{issue_title}' clearly and concisely."
-    initial_response = chain.run(initial_prompt)
+    initial_response = lcel.run(f"Explain the topic '{issue_title}' clearly and concisely.", max_length=840)  # Limit to ~840 characters
 
     date = datetime.now().strftime('%Y-%m-%d')
     frontmatter = f"---\ntitle: {issue_title}\ndate: {date}\nauthor: Generated\n---\n\n"
