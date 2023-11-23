@@ -2,7 +2,7 @@ name: issueblogger
 
 on:
   issues:
-    types: [opened]
+    types: [closed]
 
 jobs:
   generate-blog-post:
@@ -10,39 +10,47 @@ jobs:
     env:
       ISSUE_TITLE: ${{ github.event.issue.title }}
       ISSUE_NUMBER: ${{ github.event.issue.number }}
-      BRANCH_NAME: "${{ github.event.issue.number }}-issueblogger" 
+      BRANCH_NAME: "${{ github.event.issue.number }}-issueblogger"
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      with:
-        submodules: true
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
 
-    - name: Update Submodules to Latest Commit on Specified Branch
-      run: |
-        git submodule update --init --recursive
-        git submodule foreach --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; git pull origin $branch'
+      - name: Update Submodules to Latest Commit on Specified Branch
+        run: |
+          git submodule update --init --recursive
+          git submodule foreach --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; git pull origin $branch'
 
-    - name: Build Docker Image
-      run: docker build -t issueblogger -f scripts/Dockerfile .
+      - name: Fetch Issue Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER" > issue_data.json
 
-    - name: Generate Content
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      run: docker run --rm -e OPENAI_API_KEY issueblogger python /usr/src/app/scripts/issueblogger.py "$ISSUE_TITLE" "$ISSUE_NUMBER"
+      - name: Build Docker Image
+        run: docker build -t issueblogger -f scripts/Dockerfile .
 
-    - name: Commit and Push Changes
-      run: |
-        git config user.name 'github-actions'
-        git config user.email 'github-actions@github.com'
-        git add ./blog/${ISSUE_NUMBER}-new-post.md
-        git commit -m "Add new blog post for issue #${ISSUE_NUMBER}"
-        git push
+      - name: Generate Content
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: docker run --rm -e OPENAI_API_KEY -v ${{ github.workspace }}:/data issueblogger python /usr/src/app/scripts/issueblogger.py /data/issue_data.json
 
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Add new blog post for issue #${ISSUE_NUMBER}"
-        title: "Blog Post: $ISSUE_NUMBER - $ISSUE_TITLE"
-        branch: $BRANCH_NAME
+      - name: Commit and Push Changes
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'github-actions@github.com'
+          git add ./blog/${ISSUE_NUMBER}-new-post.md
+          git commit -m "Add new blog post for issue #${ISSUE_NUMBER}"
+          git push
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add new blog post for issue #${ISSUE_NUMBER}"
+          title: "Blog Post: $ISSUE_NUMBER - $ISSUE_TITLE"
+          branch: $BRANCH_NAME
 
