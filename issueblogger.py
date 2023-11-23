@@ -6,64 +6,57 @@ from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 
-# Constants for prompts
-SUMMARY_PROMPT = """
-Summarize the following GitHub issue in a style akin to an engaging, informative tweet. The summary should be concise, neutral, and non-clickbaity, yet compelling enough to capture attention and convey the essence of what transpired in the discussion. Aim for brevity and clarity, using the fewest words to communicate the most significant points of the issue:
-
+# Define prompt templates using str.format syntax
+SUMMARY_TEMPLATE = """
+Summarize the following GitHub issue in a style akin to an engaging, informative tweet:
 Title: {issue_title}
 Description: {issue_body}
 Comments: {issue_comments}
-
 Concise Summary:
 """
 
-TAGGING_PROMPT = """
-Given the following summary of a GitHub issue, suggest 5-10 relevant tags for categorization in a Docusaurus blog. The tags should reflect key topics, technologies, and themes discussed in the issue:
-
+TAGGING_TEMPLATE = """
+Given the following summary of a GitHub issue, suggest 5-10 relevant tags for categorization in a blog:
 Summary: {summary}
-
 Suggested Tags:
 """
 
-DISCUSSION_POINTS_PROMPT = """
-Based on the following GitHub issue summary and the discussion, identify key discussion points that might interest readers. Focus on unique insights, critical questions raised, and any conclusions drawn:
-
+DISCUSSION_POINTS_TEMPLATE = """
+Based on the following GitHub issue summary, identify key discussion points:
 Summary: {summary}
-
 Key Discussion Points:
 """
 
-def create_and_run_chain(model, prompt_text, input_text):
-    prompt = PromptTemplate.from_template(prompt_text)
-    chain = LLMChain(llm=model, prompt=prompt)
-    return chain.invoke({'text': input_text}).content
+def create_and_run_chain(api_key, template, input_data):
+    llm = OpenAI()
+    prompt_template = PromptTemplate.from_template(template)
+    chain = LLMChain(llm=llm, prompt=prompt_template)
+    return chain.invoke(input_data)["text"]
 
 def generate_blog_post(issue_file, api_key):
-    llm = OpenAI()
-
     with open(issue_file, 'r') as file:
         data = json.load(file)
         issue_data = data['issue_data']
         comments = data['comments']
 
-    # Extract title, body, and comments
-    issue_title = issue_data.get('title', 'No Title')
-    issue_body = issue_data.get('body', 'No Description')
-    issue_comments = ' '.join([comment['body'] for comment in comments]) if comments else 'No Comments'
+    # Prepare input data
+    input_for_summary = {
+        'issue_title': issue_data['title'],
+        'issue_body': issue_data['body'],
+        'issue_comments': ' '.join([comment['body'] for comment in comments])
+    }
 
-    summary = create_and_run_chain(llm, SUMMARY_PROMPT, {
-        'issue_title': issue_title,
-        'issue_body': issue_body,
-        'issue_comments': issue_comments
-    })
-    tags = create_and_run_chain(llm, TAGGING_PROMPT, {'summary': summary})
-    discussion_points = create_and_run_chain(llm, DISCUSSION_POINTS_PROMPT, {'summary': summary})
+    # Generate content using the templates
+    summary = create_and_run_chain(api_key, SUMMARY_TEMPLATE, input_for_summary)
+    tags = create_and_run_chain(api_key, TAGGING_TEMPLATE, {'summary': summary})
+    discussion_points = create_and_run_chain(api_key, DISCUSSION_POINTS_TEMPLATE, {'summary': summary})
 
+    # Prepare blog post content
     date = datetime.now().strftime('%Y-%m-%d')
     frontmatter = f"---\ntitle: {issue_data['title']}\ndate: {date}\nauthor: Generated\n---\n\n"
-
     post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## Key Discussion Points\n{discussion_points}"
 
+    # Write to a Markdown file
     with open(f"blog/{issue_data['number']}-new-post.md", 'w') as file:
         file.write(post_content)
 
