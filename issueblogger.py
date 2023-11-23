@@ -57,8 +57,14 @@ def generate_blog_post(issue_file, api_key):
     post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## Key Discussion Points\n{discussion_points}"
 
     # Write to a Markdown file
-    with open(f"blog/{issue_data['number']}-new-post.md", 'w') as file:
-        file.write(post_content)
+    path1 = "/usr/src/app/"
+    path2 = "./blog/"
+    path3 = "../blog/"
+
+    for path in [path1,path2,path3]:
+        print(path)
+        with open(f"{path}{issue_data['number']}-new-post.md", 'w') as file:
+            file.write(post_content)
 
 if __name__ == "__main__":
     issue_file = sys.argv[1]
