@@ -5,7 +5,7 @@ from datetime import datetime
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
-import logger
+import logging
 
 # Define prompt templates using str.format syntax
 SUMMARY_TEMPLATE = """
@@ -33,7 +33,7 @@ def create_and_run_chain(api_key, template, input_data):
     prompt_template = PromptTemplate.from_template(template)
     chain = LLMChain(llm=llm, prompt=prompt_template)
     result = chain.invoke(input_data)["text"]
-    logger.log(result)
+    logging.log(result)
     return result
 
 def generate_blog_post(issue_file, api_key):
@@ -61,7 +61,7 @@ def generate_blog_post(issue_file, api_key):
 
     # Write to a Markdown file
     filepath = f"blog/{issue_data['number']}-new-post.md" 
-    logger.log(filepath)
+    logging.log(filepath)
     with open(filepath, 'w') as file:
         file.write(post_content)
 
