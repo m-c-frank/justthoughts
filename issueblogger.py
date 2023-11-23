@@ -8,7 +8,7 @@ from langchain.prompts import PromptTemplate
 
 # Define prompt templates using str.format syntax
 SUMMARY_TEMPLATE = """
-Summarize the following GitHub issue in a style akin to an engaging, informative tweet:
+ummarize the following GitHub issue in a style akin to an engaging, informative tweet. The summary should be concise, neutral, and non-clickbaity, yet compelling enough to capture attention and convey the essence of what transpired in the discussion. Aim for brevity and clarity, using the fewest words to communicate the most significant points of the issue:
 Title: {issue_title}
 Description: {issue_body}
 Comments: {issue_comments}
@@ -16,13 +16,13 @@ Concise Summary:
 """
 
 TAGGING_TEMPLATE = """
-Given the following summary of a GitHub issue, suggest 5-10 relevant tags for categorization in a blog:
+Given the following summary of a GitHub issue, suggest 5-10 relevant tags for categorization in a Docusaurus blog. The tags should reflect key topics, technologies, and themes discussed in the issue:
 Summary: {summary}
 Suggested Tags:
 """
 
 DISCUSSION_POINTS_TEMPLATE = """
-Based on the following GitHub issue summary, identify key discussion points:
+Based on the following GitHub issue summary and the discussion, identify key discussion points that might interest readers. Focus on unique insights, critical questions raised, and any conclusions drawn:
 Summary: {summary}
 Key Discussion Points:
 """
