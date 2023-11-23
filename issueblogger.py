@@ -54,7 +54,7 @@ def generate_blog_post(issue_file, api_key):
 
     post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## New Discussion Points\n{discussion_points}"
 
-    with open(f'blog/{issue_data['number']}-new-post.md', 'w') as file:
+    with open(f"blog/{issue_data['number']}-new-post.md", 'w') as file:
         file.write(post_content)
 
 if __name__ == "__main__":
