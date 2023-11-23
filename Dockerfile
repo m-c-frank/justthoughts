@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 # Copy the requirements file into the container at /usr/src/app
 # Adjust the path to the requirements.txt file relative to the root of the repository
-COPY scripts/requirements.txt ./
+COPY requirements.txt ./
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
