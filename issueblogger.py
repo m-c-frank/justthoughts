@@ -57,9 +57,7 @@ def generate_blog_post(issue_file, api_key):
     post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## Key Discussion Points\n{discussion_points}"
 
     # Write to a Markdown file
-    path1 = "/usr/src/app/"
     path2 = "./blog/"
-    path3 = "../blog/"
 
     for path in [path1,path2,path3]:
         print(path)
