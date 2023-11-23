@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
-          ls
+          ls blog
           git status
           git add ./blog/${ISSUE_NUMBER}-new-post.md
           git commit -m "Add new blog post for issue #${ISSUE_NUMBER}"
