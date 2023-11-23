@@ -26,9 +26,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Fetch Issue Details
           curl -H "Authorization: token $GITHUB_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER" > issue_data.json
+               "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER" > issue_details.json
+          
+          # Fetch Comments
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/comments" > issue_comments.json
+
+          # Combine issue details and comments into one file
+          echo '{"issue_data":' > issue_data.json
+          cat issue_details.json >> issue_data.json
+          echo ',"comments":' >> issue_data.json
+          cat issue_comments.json >> issue_data.json
+          echo '}' >> issue_data.json
 
       - name: Build Docker Image
         run: docker build -t issueblogger -f scripts/Dockerfile .
