@@ -5,7 +5,6 @@ from datetime import datetime
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
-import logging
 
 # Define prompt templates using str.format syntax
 SUMMARY_TEMPLATE = """
@@ -32,9 +31,7 @@ def create_and_run_chain(api_key, template, input_data):
     llm = OpenAI()
     prompt_template = PromptTemplate.from_template(template)
     chain = LLMChain(llm=llm, prompt=prompt_template)
-    result = chain.invoke(input_data)["text"]
-    logging.log(result)
-    return result
+    return chain.invoke(input_data)["text"]
 
 def generate_blog_post(issue_file, api_key):
     with open(issue_file, 'r') as file:
@@ -60,13 +57,10 @@ def generate_blog_post(issue_file, api_key):
     post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## Key Discussion Points\n{discussion_points}"
 
     # Write to a Markdown file
-    filepath = f"blog/{issue_data['number']}-new-post.md" 
-    logging.log(filepath)
-    with open(filepath, 'w') as file:
+    with open(f"blog/{issue_data['number']}-new-post.md", 'w') as file:
         file.write(post_content)
 
 if __name__ == "__main__":
     issue_file = sys.argv[1]
     api_key = os.environ.get('OPENAI_API_KEY')
     generate_blog_post(issue_file, api_key)
-
