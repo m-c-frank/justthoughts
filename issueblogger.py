@@ -33,26 +33,36 @@ Summary: {summary}
 Key Discussion Points:
 """
 
-
 def create_and_run_chain(model, prompt_text, input_text):
     prompt = PromptTemplate.from_template(prompt_text)
     chain = LLMChain(llm=model, prompt=prompt)
     return chain.invoke({'text': input_text}).content
 
 def generate_blog_post(issue_file, api_key):
-    llm = OpenAI()
+    llm = OpenAI(api_key)
 
     with open(issue_file, 'r') as file:
-        issue_data = json.load(file)
+        data = json.load(file)
+        issue_data = data['issue_data']
+        comments = data['comments']
 
-    summary = create_and_run_chain(llm, SUMMARY_PROMPT, issue_data['body'])
-    tags = create_and_run_chain(llm, TAGGING_PROMPT, summary)
-    discussion_points = create_and_run_chain(llm, DISCUSSION_POINTS_PROMPT, issue_data['body'])
+    # Extract title, body, and comments
+    issue_title = issue_data.get('title', 'No Title')
+    issue_body = issue_data.get('body', 'No Description')
+    issue_comments = ' '.join([comment['body'] for comment in comments]) if comments else 'No Comments'
+
+    summary = create_and_run_chain(llm, SUMMARY_PROMPT, {
+        'issue_title': issue_title,
+        'issue_body': issue_body,
+        'issue_comments': issue_comments
+    })
+    tags = create_and_run_chain(llm, TAGGING_PROMPT, {'summary': summary})
+    discussion_points = create_and_run_chain(llm, DISCUSSION_POINTS_PROMPT, {'summary': summary})
 
     date = datetime.now().strftime('%Y-%m-%d')
     frontmatter = f"---\ntitle: {issue_data['title']}\ndate: {date}\nauthor: Generated\n---\n\n"
 
-    post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## New Discussion Points\n{discussion_points}"
+    post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## Key Discussion Points\n{discussion_points}"
 
     with open(f"blog/{issue_data['number']}-new-post.md", 'w') as file:
         file.write(post_content)
@@ -61,3 +71,4 @@ if __name__ == "__main__":
     issue_file = sys.argv[1]
     api_key = os.environ.get('OPENAI_API_KEY')
     generate_blog_post(issue_file, api_key)
+
