@@ -40,7 +40,7 @@ def create_and_run_chain(model, prompt_text, input_text):
     return chain.invoke({'text': input_text}).content
 
 def generate_blog_post(issue_file, api_key):
-    llm = OpenAI(api_key)
+    llm = OpenAI()
 
     with open(issue_file, 'r') as file:
         issue_data = json.load(file)
