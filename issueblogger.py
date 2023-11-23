@@ -59,7 +59,7 @@ def generate_blog_post(issue_file, api_key):
     # Write to a Markdown file
     path2 = "./blog/"
 
-    for path in [path1,path2,path3]:
+    for path in [path2]:
         print(path)
         with open(f"{path}{issue_data['number']}-new-post.md", 'w') as file:
             file.write(post_content)
