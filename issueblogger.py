@@ -5,10 +5,11 @@ from datetime import datetime
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
+import logger
 
 # Define prompt templates using str.format syntax
 SUMMARY_TEMPLATE = """
-ummarize the following GitHub issue in a style akin to an engaging, informative tweet. The summary should be concise, neutral, and non-clickbaity, yet compelling enough to capture attention and convey the essence of what transpired in the discussion. Aim for brevity and clarity, using the fewest words to communicate the most significant points of the issue:
+Summarize the following GitHub issue in a style akin to an engaging, informative tweet:
 Title: {issue_title}
 Description: {issue_body}
 Comments: {issue_comments}
@@ -16,13 +17,13 @@ Concise Summary:
 """
 
 TAGGING_TEMPLATE = """
-Given the following summary of a GitHub issue, suggest 5-10 relevant tags for categorization in a Docusaurus blog. The tags should reflect key topics, technologies, and themes discussed in the issue:
+Given the following summary of a GitHub issue, suggest 5-10 relevant tags for categorization in a blog:
 Summary: {summary}
 Suggested Tags:
 """
 
 DISCUSSION_POINTS_TEMPLATE = """
-Based on the following GitHub issue summary and the discussion, identify key discussion points that might interest readers. Focus on unique insights, critical questions raised, and any conclusions drawn:
+Based on the following GitHub issue summary, identify key discussion points:
 Summary: {summary}
 Key Discussion Points:
 """
@@ -31,7 +32,9 @@ def create_and_run_chain(api_key, template, input_data):
     llm = OpenAI()
     prompt_template = PromptTemplate.from_template(template)
     chain = LLMChain(llm=llm, prompt=prompt_template)
-    return chain.invoke(input_data)["text"]
+    result = chain.invoke(input_data)["text"]
+    logger.log(result)
+    return result
 
 def generate_blog_post(issue_file, api_key):
     with open(issue_file, 'r') as file:
@@ -57,7 +60,9 @@ def generate_blog_post(issue_file, api_key):
     post_content = f"{frontmatter}## Summary\n{summary}\n\n## Tags\n{tags}\n\n## Key Discussion Points\n{discussion_points}"
 
     # Write to a Markdown file
-    with open(f"blog/{issue_data['number']}-new-post.md", 'w') as file:
+    filepath = f"blog/{issue_data['number']}-new-post.md" 
+    logger.log(filepath)
+    with open(filepath, 'w') as file:
         file.write(post_content)
 
 if __name__ == "__main__":
