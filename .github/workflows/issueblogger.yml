@@ -25,7 +25,7 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
-      
+
       - name: Install GitHub CLI
         run: |
           sudo apt-get update
@@ -35,12 +35,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Fetch Issue Details
+          # Fetch Issue Details and Comments
           curl -H "Authorization: token $GITHUB_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}" > issue_details.json
           
-          # Fetch Comments
           curl -H "Authorization: token $GITHUB_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" > issue_comments.json
@@ -56,21 +55,21 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/issueblogger.py issue_data.json  # Adjust path as needed
+
       - name: Commit and Push Changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
-          
-          # Set the remote URL to use HTTPS
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          
-          git checkout main
 
+          # Set the remote URL to use HTTPS
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
+          git checkout main
           git fetch
           git pull
-          
+
           # Create a new branch and commit changes
           BRANCH_NAME="${{ github.event.issue.number }}-issueblogger"
           git checkout -b "$BRANCH_NAME" main
@@ -85,7 +84,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-          head: ${{ github.repository }}:${{ github.event.issue.number }}-issueblogger
           title: "New Blog Post: Issue #${{ github.event.issue.number }}"
           body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}. It includes all the necessary details and discussions covered in the issue."
-          branch: "${{ github.event.issue.number }}-issueblogger-branch"
