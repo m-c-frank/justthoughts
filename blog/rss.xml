@@ -38,6 +38,34 @@
 </ol>]]></content:encoded>
         </item>
         <item>
+            <title><![CDATA[bug pr from wrong branch issueblogger]]></title>
+            <link>https://justthoughts.xyz/blog/98-new-post</link>
+            <guid>https://justthoughts.xyz/blog/98-new-post</guid>
+            <pubDate>Fri, 24 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Summary]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://justthoughts.xyz/blog/98-new-post#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
+<p>A bug in Issueblogger is creating pull requests from the wrong branch. After a few attempts, the correct commit should be pushed to the main branch and the issue should be resolved. #Issueblogger #GitHub #Bug</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tags">Tags<a href="https://justthoughts.xyz/blog/98-new-post#tags" class="hash-link" aria-label="Direct link to Tags" title="Direct link to Tags">​</a></h2>
+<ol>
+<li>Issueblogger</li>
+<li>GitHub</li>
+<li>Bug</li>
+<li>Troubleshooting</li>
+<li>Pull Requests</li>
+<li>Branches</li>
+<li>Commits</li>
+<li>Source Control</li>
+<li>Software Development</li>
+<li>Debugging</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-discussion-points">Key Discussion Points<a href="https://justthoughts.xyz/blog/98-new-post#key-discussion-points" class="hash-link" aria-label="Direct link to Key Discussion Points" title="Direct link to Key Discussion Points">​</a></h2>
+<ul>
+<li>Bug in Issueblogger creating pull requests from wrong branch</li>
+<li>Attempts to resolve the issue</li>
+<li>Pushing correct commit to main branch</li>
+</ul>]]></content:encoded>
+        </item>
+        <item>
             <title><![CDATA[New Note 2023-11-21 07:45:00]]></title>
             <link>https://justthoughts.xyz/blog/2023/11/21/07-45-00-note</link>
             <guid>https://justthoughts.xyz/blog/2023/11/21/07-45-00-note</guid>
