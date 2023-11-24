@@ -25,6 +25,11 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
+      
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
 
       - name: Fetch Issue Data
         env:
@@ -76,14 +81,12 @@ jobs:
           git push -u origin "$BRANCH_NAME"
           
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "${{ github.event.issue.number }}-issueblogger"
-          base: "main"
-          title: "Blog Post for Issue #${{ github.event.issue.number }}"
-          body: "This pull request contains a new blog post for the closed issue #${{ github.event.issue.number }}."
-          commit-message: "Add new blog post for issue #${{ github.event.issue.number }}"
-          labels: blog-post
-          assignees: m-c-frank # Optional: Assign the PR to a specific user or leave this out
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Authenticate with GitHub CLI
+          echo "$GITHUB_TOKEN" | gh auth login --with-token
 
+          # Create a new pull request
+          PR_URL=$(gh pr create --base main --head ${{ github.repository }}:${{ github.event.issue.number }}-issueblogger --title "Blog Post for Issue #${{ github.event.issue.number }}" --body "This pull request contains a new blog post for the closed issue #${{ github.event.issue.number }}." --repo ${{ github.repository }} --label "blog-post" --assignee your-github-username)
+          echo "Pull Request URL: $PR_URL"
