@@ -85,5 +85,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Create a new pull request
-          PR_URL=$(gh pr create --base main --head ${{ github.repository }}:${{ github.event.issue.number }}-issueblogger --title "Blog Post for Issue #${{ github.event.issue.number }}"
+          PR_URL=$(gh pr create --base main --head ${{ github.repository }}:${{ github.event.issue.number }}-issueblogger --title "Blog Post for Issue #${{ github.event.issue.number }}")
           echo "Pull Request URL: $PR_URL"
