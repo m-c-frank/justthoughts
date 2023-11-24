@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          submodules: true  # Keeping this to handle the submodule
 
       - name: Set up Python Environment
         uses: actions/setup-python@v2
@@ -23,7 +25,7 @@ jobs:
       - name: Install Dependencies
         run: pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
 
-      - name: Fetch Issue Data and Generate Content
+      - name: Fetch Issue Data
         run: |
           curl "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}" > issue_details.json
           curl "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" > issue_comments.json
@@ -32,7 +34,9 @@ jobs:
           echo ',"comments":' >> issue_data.json
           cat issue_comments.json >> issue_data.json
           echo '}' >> issue_data.json
-          python scripts/issueblogger.py issue_data.json  # Adjust path as needed
+
+      - name: Generate Content
+        run: python scripts/issueblogger.py issue_data.json  # Adjust path as needed
 
       - name: Commit and Push Changes
         run: |
