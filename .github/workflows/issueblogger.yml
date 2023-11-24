@@ -34,8 +34,10 @@ jobs:
           echo ',"comments":' >> issue_data.json
           cat issue_comments.json >> issue_data.json
           echo '}' >> issue_data.json
-
+          
       - name: Generate Content
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/issueblogger.py issue_data.json  # Adjust path as needed
 
       - name: Commit and Push Changes
