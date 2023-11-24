@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        with:
-          submodules: true
 
       - name: Set up Python Environment
         uses: actions/setup-python@v2
@@ -23,57 +21,36 @@ jobs:
           python-version: '3.9'  # or any other compatible Python version
 
       - name: Install Dependencies
+        run: pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
+
+      - name: Fetch Issue Data and Generate Content
         run: |
-          pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gh
-      - name: Fetch Issue Data
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Fetch Issue Details and Comments
-          curl -H "Authorization: token $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}" > issue_details.json
-          
-          curl -H "Authorization: token $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" > issue_comments.json
-          # Combine issue details and comments into one file
+          curl "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}" > issue_details.json
+          curl "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" > issue_comments.json
           echo '{"issue_data":' > issue_data.json
           cat issue_details.json >> issue_data.json
           echo ',"comments":' >> issue_data.json
           cat issue_comments.json >> issue_data.json
           echo '}' >> issue_data.json
-      - name: Generate Content
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python scripts/issueblogger.py issue_data.json  # Adjust path as needed
+          python scripts/issueblogger.py issue_data.json  # Adjust path as needed
 
       - name: Commit and Push Changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
-          # Set the remote URL to use HTTPS
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          git checkout main
           git fetch
-          git pull
-          # Create a new branch and commit changes
+          git checkout main
+          git pull origin main
           BRANCH_NAME="${{ github.event.issue.number }}-issueblogger"
-          git checkout -b "$BRANCH_NAME" main
+          git checkout -b "$BRANCH_NAME" || git checkout "$BRANCH_NAME"
           git add ./blog/${{ github.event.issue.number }}-new-post.md
           git commit -m "Add new blog post for issue #${{ github.event.issue.number }}"
-          # Push the branch to the remote repository
-          git push --force -u origin "$BRANCH_NAME"
+          git push -u origin "$BRANCH_NAME"
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5.0.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.issue.number }}-issueblogger
           base: main
           title: "New Blog Post: Issue #${{ github.event.issue.number }}"
-          body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}. It includes all the necessary details and discussions covered in the issue."
+          body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}."
