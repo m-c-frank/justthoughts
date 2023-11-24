@@ -79,11 +79,13 @@ jobs:
 
           # Push the branch to the remote repository
           git push --force -u origin "$BRANCH_NAME"
-          
+
       - name: Create Pull Request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Create a new pull request
-          PR_URL=$(gh pr create --base main --head ${{ github.repository }}:${{ github.event.issue.number }}-issueblogger --title "New Blog Post: Issue #${{ github.event.issue.number }}" --body "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}. It includes all the necessary details and discussions covered in the issue.")
-          echo "Pull Request URL: $PR_URL"
+        uses: peter-evans/create-pull-request@v5.0.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          head: ${{ github.repository }}:${{ github.event.issue.number }}-issueblogger
+          title: "New Blog Post: Issue #${{ github.event.issue.number }}"
+          body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}. It includes all the necessary details and discussions covered in the issue."
+          branch: "${{ github.event.issue.number }}-issueblogger-branch"
