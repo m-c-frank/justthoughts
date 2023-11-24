@@ -29,7 +29,7 @@ jobs:
 
       - name: Fetch Issue Data
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           # Fetch Issue Details and Comments
           curl -H "Authorization: token $GITHUB_TOKEN" \
@@ -54,7 +54,7 @@ jobs:
 
       - name: Commit and Push Changes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
@@ -78,7 +78,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5.0.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
           base: main
           title: "New Blog Post: Issue #${{ github.event.issue.number }}"
           body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}. It includes all the necessary details and discussions covered in the issue."
