@@ -7,20 +7,20 @@ on:
 jobs:
   generate-blog-post:
     runs-on: ubuntu-latest
-    env:
-      ISSUE_TITLE: ${{ github.event.issue.title }}
-      ISSUE_NUMBER: ${{ github.event.issue.number }}
-      BRANCH_NAME: "${{ github.event.issue.number }}-issueblogger"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           submodules: true
 
-      - name: Update Submodules to Latest Commit on Specified Branch
+      - name: Set up Python Environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # or any other compatible Python version
+
+      - name: Install Dependencies
         run: |
-          git submodule update --init --recursive
-          git submodule foreach --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; git pull origin $branch'
+          pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
 
       - name: Fetch Issue Data
         env:
@@ -29,12 +29,12 @@ jobs:
           # Fetch Issue Details
           curl -H "Authorization: token $GITHUB_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER" > issue_details.json
+               "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}" > issue_details.json
           
           # Fetch Comments
           curl -H "Authorization: token $GITHUB_TOKEN" \
                -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/comments" > issue_comments.json
+               "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" > issue_comments.json
 
           # Combine issue details and comments into one file
           echo '{"issue_data":' > issue_data.json
@@ -43,29 +43,35 @@ jobs:
           cat issue_comments.json >> issue_data.json
           echo '}' >> issue_data.json
 
-      - name: Build Docker Image
-        run: docker build -t issueblogger -f scripts/Dockerfile .
-
       - name: Generate Content
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: docker run --rm -e OPENAI_API_KEY -v ${{ github.workspace }}:/data issueblogger python /usr/src/app/scripts/issueblogger.py /data/issue_data.json
-
+        run: python scripts/issueblogger.py issue_data.json  # Adjust path as needed
       - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
-          ls scripts
-          ls blog
-          git add ./blog/${ISSUE_NUMBER}-new-post.md
-          git commit -m "Add new blog post for issue #${ISSUE_NUMBER}"
-          git push
+          
+          # Set the remote URL to use HTTPS
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+
+          # Create a new branch and commit changes
+          BRANCH_NAME="${{ github.event.issue.number }}-issueblogger"
+          git checkout -b "$BRANCH_NAME"
+          git add ./blog/${{ github.event.issue.number }}-new-post.md
+          git commit -m "Add new blog post for issue #${{ github.event.issue.number }}"
+
+          # Push the branch to the remote repository
+          git push -u origin "$BRANCH_NAME"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Add new blog post for issue #${ISSUE_NUMBER}"
-          title: "Blog Post: $ISSUE_NUMBER - $ISSUE_TITLE"
-          branch: $BRANCH_NAME
+          commit-message: "Add new blog post for issue #${{ github.event.issue.number }}"
+          title: "Blog Post: ${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
+          branch: "${{ github.event.issue.number }}-issueblogger" # The new branch with changes
+          base: "main" # The branch you want to merge into, typically 'main' or 'master'
 
