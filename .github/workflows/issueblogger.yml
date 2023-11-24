@@ -84,9 +84,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Authenticate with GitHub CLI
-          echo "$GITHUB_TOKEN" | gh auth login --with-token
-
           # Create a new pull request
           PR_URL=$(gh pr create --base main --head ${{ github.repository }}:${{ github.event.issue.number }}-issueblogger --title "Blog Post for Issue #${{ github.event.issue.number }}" --body "This pull request contains a new blog post for the closed issue #${{ github.event.issue.number }}." --repo ${{ github.repository }} --label "blog-post" --assignee your-github-username)
           echo "Pull Request URL: $PR_URL"
