@@ -29,4 +29,4 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: bash scripts/issueblogger.sh ${{ github.event.issue.number }}
+        run: bash issueblogger.sh ${{ github.event.issue.number }}
