@@ -7,50 +7,28 @@ on:
 jobs:
   generate-blog-post:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           submodules: true
+          fetch-depth: 0
 
       - name: Set up Python Environment
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'  # or any other compatible Python version
+          python-version: '3.9'
 
       - name: Install Dependencies
-        run: |
-          pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
+        run: pip install -r scripts/requirements.txt
 
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gh
-
-      - name: Fetch Issue Data
+      - name: Fetch Issue Data and Generate Content
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
-          # Fetch Issue Details and Comments
-          curl -H "Authorization: token $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}" > issue_details.json
-          
-          curl -H "Authorization: token $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" > issue_comments.json
-
-          # Combine issue details and comments into one file
-          echo '{"issue_data":' > issue_data.json
-          cat issue_details.json >> issue_data.json
-          echo ',"comments":' >> issue_data.json
-          cat issue_comments.json >> issue_data.json
-          echo '}' >> issue_data.json
-
-      - name: Generate Content
-        env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python scripts/issueblogger.py issue_data.json  # Adjust path as needed
+        run: |
+          python scripts/issueblogger.py ${{ github.event.issue.number }}
 
       - name: Commit and Push Changes
         env:
@@ -59,26 +37,22 @@ jobs:
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
 
-          # Set the remote URL to use HTTPS
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
 
           git checkout main
-          git fetch
           git pull
 
-          # Create a new branch and commit changes
           BRANCH_NAME="${{ github.event.issue.number }}-issueblogger"
-          git checkout -b "$BRANCH_NAME" main
-          git add ./blog/${{ github.event.issue.number }}-new-post.md
+          git checkout -b "$BRANCH_NAME"
+          git add .
           git commit -m "Add new blog post for issue #${{ github.event.issue.number }}"
-
-          # Push the branch to the remote repository
-          git push --force -u origin "$BRANCH_NAME"
+          git push --force --set-upstream origin "$BRANCH_NAME"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5.0.2
         with:
           token: ${{ secrets.GH_PAT }}
           base: main
+          branch: ${{ github.event.issue.number }}-issueblogger
           title: "New Blog Post: Issue #${{ github.event.issue.number }}"
-          body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}. It includes all the necessary details and discussions covered in the issue."
+          body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}."
