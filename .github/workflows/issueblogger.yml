@@ -56,10 +56,15 @@ jobs:
           
           # Set the remote URL to use HTTPS
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          
+          git checkout main
 
+          git fetch
+          git pull
+          
           # Create a new branch and commit changes
           BRANCH_NAME="${{ github.event.issue.number }}-issueblogger"
-          git checkout -b "$BRANCH_NAME"
+          git checkout -b "$BRANCH_NAME" main
           git add ./blog/${{ github.event.issue.number }}-new-post.md
           git commit -m "Add new blog post for issue #${{ github.event.issue.number }}"
 
