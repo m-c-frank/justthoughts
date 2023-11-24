@@ -4,10 +4,6 @@ on:
   issues:
     types: [closed]
 
-permissions:
-  contents: write
-  pull-requests: write
-  
 jobs:
   generate-blog-post:
     runs-on: ubuntu-latest
@@ -76,11 +72,18 @@ jobs:
           git push -u origin "$BRANCH_NAME"
 
       - name: Create Pull Request
+        id: create_pr
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Add new blog post for issue #${{ github.event.issue.number }}"
           title: "Blog Post: ${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
           branch: "${{ github.event.issue.number }}-issueblogger" # The new branch with changes
-          base: "main" # The branch you want to merge into, typically 'main' or 'master'
+          base: "main" # The branch you want to merge into
+
+      - name: Check PR Output
+        if: always()
+        run: |
+          echo "PR Number: ${{ steps.create_pr.outputs.pull-request-number }}"
+          echo "PR URL: ${{ steps.create_pr.outputs.pull-request-url }}"
 
