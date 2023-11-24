@@ -74,20 +74,16 @@ jobs:
 
           # Push the branch to the remote repository
           git push -u origin "$BRANCH_NAME"
-
+          
       - name: Create Pull Request
-        id: create_pr
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "${{ github.event.issue.number }}-issueblogger"
+          base: "main"
+          title: "Blog Post for Issue #${{ github.event.issue.number }}"
+          body: "This pull request contains a new blog post for the closed issue #${{ github.event.issue.number }}."
           commit-message: "Add new blog post for issue #${{ github.event.issue.number }}"
-          title: "Blog Post: ${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
-          branch: "${{ github.event.issue.number }}-issueblogger" # The new branch with changes
-          base: "main" # The branch you want to merge into
-
-      - name: Check PR Output
-        if: always()
-        run: |
-          echo "PR Number: ${{ steps.create_pr.outputs.pull-request-number }}"
-          echo "PR URL: ${{ steps.create_pr.outputs.pull-request-url }}"
+          labels: blog-post
+          assignees: m-c-frank # Optional: Assign the PR to a specific user or leave this out
 
