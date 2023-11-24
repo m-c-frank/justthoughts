@@ -2,11 +2,43 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://justthoughts.xyz/blog</id>
     <title>justthoughts Blog</title>
-    <updated>2023-11-21T00:00:00.000Z</updated>
+    <updated>2023-11-24T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://justthoughts.xyz/blog"/>
     <subtitle>justthoughts Blog</subtitle>
     <icon>https://justthoughts.xyz/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[docker tests]]></title>
+        <id>https://justthoughts.xyz/blog/84-new-post</id>
+        <link href="https://justthoughts.xyz/blog/84-new-post"/>
+        <updated>2023-11-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Summary]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://justthoughts.xyz/blog/84-new-post#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
+<p>Create a script to easily test workflows using Docker for an easier testing process. #Docker #Script #Testing</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tags">Tags<a href="https://justthoughts.xyz/blog/84-new-post#tags" class="hash-link" aria-label="Direct link to Tags" title="Direct link to Tags">​</a></h2>
+<ol>
+<li>Automation</li>
+<li>DevOps</li>
+<li>Continuous Integration</li>
+<li>Quality Assurance</li>
+<li>Workflows</li>
+<li>Software Development</li>
+<li>Testing Strategies</li>
+<li>Containerization</li>
+<li>Scripting</li>
+<li>Cloud Computing</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-discussion-points">Key Discussion Points<a href="https://justthoughts.xyz/blog/84-new-post#key-discussion-points" class="hash-link" aria-label="Direct link to Key Discussion Points" title="Direct link to Key Discussion Points">​</a></h2>
+<ol>
+<li>Creating a script to enable easier testing workflows using Docker.</li>
+<li>Benefits of using Docker for testing workflows.</li>
+<li>Procedures for creating and implementing the script.</li>
+<li>Potential challenges or issues in using this script.</li>
+</ol>]]></content>
+        <author>
+            <name>Generated</name>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[New Note 2023-11-21 07:45:00]]></title>
         <id>https://justthoughts.xyz/blog/2023/11/21/07-45-00-note</id>

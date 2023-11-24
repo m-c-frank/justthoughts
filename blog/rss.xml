@@ -4,10 +4,39 @@
         <title>justthoughts Blog</title>
         <link>https://justthoughts.xyz/blog</link>
         <description>justthoughts Blog</description>
-        <lastBuildDate>Tue, 21 Nov 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 24 Nov 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[docker tests]]></title>
+            <link>https://justthoughts.xyz/blog/84-new-post</link>
+            <guid>https://justthoughts.xyz/blog/84-new-post</guid>
+            <pubDate>Fri, 24 Nov 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Summary]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://justthoughts.xyz/blog/84-new-post#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
+<p>Create a script to easily test workflows using Docker for an easier testing process. #Docker #Script #Testing</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tags">Tags<a href="https://justthoughts.xyz/blog/84-new-post#tags" class="hash-link" aria-label="Direct link to Tags" title="Direct link to Tags">​</a></h2>
+<ol>
+<li>Automation</li>
+<li>DevOps</li>
+<li>Continuous Integration</li>
+<li>Quality Assurance</li>
+<li>Workflows</li>
+<li>Software Development</li>
+<li>Testing Strategies</li>
+<li>Containerization</li>
+<li>Scripting</li>
+<li>Cloud Computing</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-discussion-points">Key Discussion Points<a href="https://justthoughts.xyz/blog/84-new-post#key-discussion-points" class="hash-link" aria-label="Direct link to Key Discussion Points" title="Direct link to Key Discussion Points">​</a></h2>
+<ol>
+<li>Creating a script to enable easier testing workflows using Docker.</li>
+<li>Benefits of using Docker for testing workflows.</li>
+<li>Procedures for creating and implementing the script.</li>
+<li>Potential challenges or issues in using this script.</li>
+</ol>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[New Note 2023-11-21 07:45:00]]></title>
             <link>https://justthoughts.xyz/blog/2023/11/21/07-45-00-note</link>
