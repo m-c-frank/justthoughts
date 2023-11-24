@@ -15,48 +15,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          submodules: true  # Keeping this to handle the submodule
+          submodules: true
 
       - name: Set up Python Environment
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'  # or any other compatible Python version
+          python-version: '3.9'
 
       - name: Install Dependencies
-        run: pip install -r scripts/requirements.txt  # Assuming your dependencies are listed here
+        run: pip install -r requirements.txt
 
-      - name: Fetch Issue Data
-        run: |
-          curl "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}" > issue_details.json
-          curl "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" > issue_comments.json
-          echo '{"issue_data":' > issue_data.json
-          cat issue_details.json >> issue_data.json
-          echo ',"comments":' >> issue_data.json
-          cat issue_comments.json >> issue_data.json
-          echo '}' >> issue_data.json
-          
-      - name: Generate Content
+      - name: Execute issueblogger.sh Script
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python scripts/issueblogger.py issue_data.json  # Adjust path as needed
-
-      - name: Commit and Push Changes
-        run: |
-          git config user.name 'github-actions'
-          git config user.email 'github-actions@github.com'
-          git fetch
-          git checkout main
-          git pull origin main
-          BRANCH_NAME="${{ github.event.issue.number }}-issueblogger"
-          git checkout -b "$BRANCH_NAME" || git checkout "$BRANCH_NAME"
-          git add ./blog/${{ github.event.issue.number }}-new-post.md
-          git commit -m "Add new blog post for issue #${{ github.event.issue.number }}"
-          git push -u origin "$BRANCH_NAME"
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5.0.2
-        with:
-          branch: ${{ github.event.issue.number }}-issueblogger
-          base: main
-          title: "New Blog Post: Issue #${{ github.event.issue.number }}"
-          body: "This pull request contains the blog post content for Issue #${{ github.event.issue.number }}."
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: bash scripts/issueblogger.sh ${{ github.event.issue.number }}
