@@ -21,6 +21,9 @@ jobs:
       - name: Update submodules to tracked branch
         run: git submodule update --remote
 
+      - name: Sanity check
+        run: cat ./scripts/llmjob.sh
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
