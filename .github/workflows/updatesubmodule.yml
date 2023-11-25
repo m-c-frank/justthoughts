@@ -1,0 +1,21 @@
+name: Update Submodule Reference
+
+on:
+  push:
+    branches:
+      - scripts
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Update submodule to latest commit from scripts branch
+        run: |
+          git submodule update --remote --merge
+          git commit -am "Update submodules to latest commit"
+          git push
