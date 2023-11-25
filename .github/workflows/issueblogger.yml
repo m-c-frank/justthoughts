@@ -17,6 +17,11 @@ jobs:
         with:
           submodules: true
 
+      - name: Update submodules
+        run: |
+          git submodule update --init --recursive
+          git submodule foreach git pull origin main
+
       - name: Set up Python Environment
         uses: actions/setup-python@v2
         with:
