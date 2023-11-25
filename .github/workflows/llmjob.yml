@@ -17,6 +17,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
+      
+      - name: Update submodules to tracked branch
+        run: git submodule update --remote
 
       - name: Set up Python
         uses: actions/setup-python@v2
