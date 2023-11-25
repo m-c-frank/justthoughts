@@ -30,5 +30,5 @@ cat scripts/llmjob.py
 pip install openai
 pip install langchain
 
-python scripts/llmjob.py issue_data.json
+python scripts/llmjob.py issue_details.json
 
