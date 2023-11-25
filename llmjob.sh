@@ -20,5 +20,5 @@ echo "$GH_PAT" | gh auth login --with-token
 # Fetch Issue Data
 curl "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues/${ISSUE_NUMBER}" > issue_details.json
 
-python scripts/llm_issue_solver.py issue_data.json
+python scripts/llmjob.py issue_data.json
 
