@@ -2,11 +2,44 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://justthoughts.xyz/blog</id>
     <title>justthoughts Blog</title>
-    <updated>2023-11-24T00:00:00.000Z</updated>
+    <updated>2023-11-25T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://justthoughts.xyz/blog"/>
     <subtitle>justthoughts Blog</subtitle>
     <icon>https://justthoughts.xyz/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[fix domain name]]></title>
+        <id>https://justthoughts.xyz/blog/102-new-post</id>
+        <link href="https://justthoughts.xyz/blog/102-new-post"/>
+        <updated>2023-11-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Summary]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://justthoughts.xyz/blog/102-new-post#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
+<p>Learn how to keep your domain name consistent by setting up a CNAME record! #GitHub #domainname #cname</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tags">Tags<a href="https://justthoughts.xyz/blog/102-new-post#tags" class="hash-link" aria-label="Direct link to Tags" title="Direct link to Tags">​</a></h2>
+<ol>
+<li>Domain Management</li>
+<li>DNS Configuration</li>
+<li>Web Hosting</li>
+<li>CNAME Records</li>
+<li>Domain Name System (DNS)</li>
+<li>Digital Networking</li>
+<li>Domain Registration</li>
+<li>Domain Name Servers</li>
+<li>Domain Name Mapping</li>
+<li>Online Branding</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-discussion-points">Key Discussion Points<a href="https://justthoughts.xyz/blog/102-new-post#key-discussion-points" class="hash-link" aria-label="Direct link to Key Discussion Points" title="Direct link to Key Discussion Points">​</a></h2>
+<ol>
+<li>Setting up a CNAME record</li>
+<li>Keeping domain name consistent</li>
+<li>Benefits of using a CNAME record</li>
+<li>GitHub usage</li>
+<li>Domain name considerations</li>
+</ol>]]></content>
+        <author>
+            <name>Generated</name>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[docker tests]]></title>
         <id>https://justthoughts.xyz/blog/84-new-post</id>
