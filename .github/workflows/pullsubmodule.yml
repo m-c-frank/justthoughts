@@ -1,0 +1,20 @@
+name: Update Submodules Workflow
+
+on:
+  repository_dispatch:
+    types: [update-submodules-event]
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: 'true'
+
+    - name: Sync and update submodules
+      run: |
+        git submodule sync
+        git submodule update --init --recursive
+        git submodule update --remote
