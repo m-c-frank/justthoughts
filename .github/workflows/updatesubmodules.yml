@@ -22,12 +22,15 @@ jobs:
 
       - name: Update submodule to latest commit on its main branch
         run: |
+          ls -la
           cd scripts  # Replace with the path to your submodule
           git fetch
           git checkout scripts  # Replace with the branch you want to track
           git pull origin scripts      # Replace with the branch you want to track
-          cd ../
-          git add scripts
+          cd ..
+          ls -la
+          git status
+          git add .
           git commit -m "Update submodule to latest commit"
           git push origin main
         env:
