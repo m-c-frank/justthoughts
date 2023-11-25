@@ -3,7 +3,7 @@ name: Deploy Docusaurus to GitHub Pages
 on:
   push:
     branches:
-      - main  # Set your default branch here
+      - main
 
 jobs:
   deploy:
@@ -14,16 +14,19 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '18.x' # Use your Node.js version
+          node-version: '18.x'
 
       - name: Install and Build
         run: |
           npm ci
           npm run build
 
+      - name: Create CNAME
+        run: echo "justthoughts.xyz" > build/CNAME
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_PAT }}  # Replace with your PAT secret name
+          github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./build
 
