@@ -72,6 +72,42 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[declare llmjobs]]></title>
+        <id>https://justthoughts.xyz/blog/115-new-post</id>
+        <link href="https://justthoughts.xyz/blog/115-new-post"/>
+        <updated>2023-11-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Summary]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://justthoughts.xyz/blog/115-new-post#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
+<ol>
+<li>We've added the 'llmjob' label to indicate when the LLM Assistant should propose solutions.</li>
+<li>This should now trigger the LLM job workflow. #Development #Automation #GitHub</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tags">Tags<a href="https://justthoughts.xyz/blog/115-new-post#tags" class="hash-link" aria-label="Direct link to Tags" title="Direct link to Tags">​</a></h2>
+<ol>
+<li>LLM Assistant</li>
+<li>Workflow</li>
+<li>Job Automation</li>
+<li>Labels</li>
+<li>Github</li>
+<li>Version Control</li>
+<li>Source Code Management</li>
+<li>Software Development</li>
+<li>Task Automation</li>
+<li>Continuous Integration</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-discussion-points">Key Discussion Points<a href="https://justthoughts.xyz/blog/115-new-post#key-discussion-points" class="hash-link" aria-label="Direct link to Key Discussion Points" title="Direct link to Key Discussion Points">​</a></h2>
+<ol>
+<li>The LLM Assistant can now suggest solutions in a more automated workflow.</li>
+<li>The new 'llmjob' label should reduce the time required to identify relevant issues.</li>
+<li>The automation process is being tested to ensure that it works as intended.</li>
+<li>The development team is open to suggestions and feedback on the new workflow.</li>
+<li>The impact of the automation on user experience should be discussed.</li>
+</ol>]]></content>
+        <author>
+            <name>Generated</name>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[docker tests]]></title>
         <id>https://justthoughts.xyz/blog/84-new-post</id>
         <link href="https://justthoughts.xyz/blog/84-new-post"/>
