@@ -30,3 +30,4 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: bash issueblogger.sh ${{ github.event.issue.number }}
+
