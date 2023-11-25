@@ -9,13 +9,23 @@ jobs:
   update-submodule:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main branch
+      - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          ref: main
+          fetch-depth: 0
 
-      - name: Update submodule to latest commit from scripts branch
+      - name: Checkout Submodule
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Update submodule to latest commit on its main branch
         run: |
-          git submodule update --remote --merge
-          git commit -am "Update submodules to latest commit"
-          git push
+          cd scripts  # Replace with the path to your submodule
+          git fetch
+          git checkout origin/scripts  # Replace with the branch you want to track
+          git pull origin scripts      # Replace with the branch you want to track
+          cd ../
+          git add scripts
+          git commit -m "Update submodule to latest commit"
+          git push origin main
