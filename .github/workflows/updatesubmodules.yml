@@ -10,27 +10,19 @@ jobs:
   update-submodule:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Checkout Submodule
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-
-      - name: Update submodule to latest commit on its main branch
+      - name: Update submodules in main
         run: |
-          cd scripts  # Replace with the path to your submodule
+          git clone https://github.com/m-c-frank/justthoughts
+          cd justthoughts
+          git submodule update --init --recursive
+          cd scripts
+          git checkout scripts
           git fetch
-          git pull --rebase # Replace with the branch you want to track
-          git checkout scripts      # Replace with the branch you want to track
+          git pull
           cd ..
-          ls -la
-          git status
           git add .
-          git commit -m "Update submodule to latest commit"
+          git add .
+          git commit -m "Updated scripts submodule to latest commit"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
