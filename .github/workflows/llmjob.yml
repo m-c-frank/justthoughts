@@ -19,7 +19,5 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           curl -o llmjob.sh "https://raw.githubusercontent.com/m-c-frank/justthoughts/scripts/llmjob.sh"
-          mkdir scripts
-          curl -o scripts/llmjob.py "https://raw.githubusercontent.com/m-c-frank/justthoughts/scripts/llmjob.py"
           bash llmjob.sh ${{ github.event.issue.number }}
 
