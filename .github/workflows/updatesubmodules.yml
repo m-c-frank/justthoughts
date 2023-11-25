@@ -1,9 +1,10 @@
-name: Update Submodule Reference
+name: 
 
 on:
   push:
     branches:
       - scripts
+  workflow_dispatch:
 
 jobs:
   update-submodule:
