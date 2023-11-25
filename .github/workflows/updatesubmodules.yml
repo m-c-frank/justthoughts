@@ -24,7 +24,7 @@ jobs:
         run: |
           cd scripts  # Replace with the path to your submodule
           git fetch
-          git checkout origin/scripts  # Replace with the branch you want to track
+          git checkout scripts  # Replace with the branch you want to track
           git pull origin scripts      # Replace with the branch you want to track
           cd ../
           git add scripts
