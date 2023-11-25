@@ -25,8 +25,8 @@ jobs:
           ls -la
           cd scripts  # Replace with the path to your submodule
           git fetch
-          git checkout scripts  # Replace with the branch you want to track
-          git pull origin scripts      # Replace with the branch you want to track
+          git pull  # Replace with the branch you want to track
+          git checkout scripts      # Replace with the branch you want to track
           cd ..
           ls -la
           git status
