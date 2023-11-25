@@ -5,6 +5,8 @@ ISSUE_NUMBER=$1
 REPO_NAME=$(basename $(git remote get-url origin) .git)
 REPO_OWNER=$(basename $(dirname $(git remote get-url origin)))
 
+echo "$ISSUE_NUMBER"
+
 ISSUE_URL="https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues/${ISSUE_NUMBER}"
 
 echo "$ISSUE_URL"
