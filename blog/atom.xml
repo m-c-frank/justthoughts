@@ -41,6 +41,37 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[improve issueblogger]]></title>
+        <id>https://justthoughts.xyz/blog/106-new-post</id>
+        <link href="https://justthoughts.xyz/blog/106-new-post"/>
+        <updated>2023-11-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Summary]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://justthoughts.xyz/blog/106-new-post#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
+<p>Improvements are needed for #Issueblogger prompts - close #113 for further details! #GitHub #Issue</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tags">Tags<a href="https://justthoughts.xyz/blog/106-new-post#tags" class="hash-link" aria-label="Direct link to Tags" title="Direct link to Tags">​</a></h2>
+<ol>
+<li>Issueblogger</li>
+<li>GitHub</li>
+<li>Improvement</li>
+<li>Prompts</li>
+<li>Issue Tracking</li>
+<li>Collaboration</li>
+<li>Open Source</li>
+<li>Version Control</li>
+<li>Documentation</li>
+<li>Troubleshooting</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-discussion-points">Key Discussion Points<a href="https://justthoughts.xyz/blog/106-new-post#key-discussion-points" class="hash-link" aria-label="Direct link to Key Discussion Points" title="Direct link to Key Discussion Points">​</a></h2>
+<ol>
+<li>Improvements needed for #Issueblogger prompts</li>
+<li>Details of #Issue 113</li>
+<li>Impact of changes on #GitHub #Issue</li>
+</ol>]]></content>
+        <author>
+            <name>Generated</name>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[docker tests]]></title>
         <id>https://justthoughts.xyz/blog/84-new-post</id>
         <link href="https://justthoughts.xyz/blog/84-new-post"/>
