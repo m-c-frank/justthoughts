@@ -18,9 +18,6 @@ jobs:
         with:
           submodules: true
       
-      - name: Update submodules to tracked branch
-        run: git submodule update --remote
-
       - name: Sanity check
         run: cat ./scripts/llmjob.sh
 
