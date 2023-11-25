@@ -1,4 +1,4 @@
-name: 
+name: update submodules
 
 on:
   push:
