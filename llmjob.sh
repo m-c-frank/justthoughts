@@ -2,8 +2,8 @@
 
 # Variables
 ISSUE_NUMBER=$1
-REPO_NAME=$(basename $(git remote get-url origin) .git)
-REPO_OWNER=$(basename $(dirname $(git remote get-url origin)))
+REPO_NAME=justthoughts
+REPO_OWNER=m-c-frank
 
 echo "$ISSUE_NUMBER"
 echo "$REPO_NAME"
