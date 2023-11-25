@@ -29,3 +29,5 @@ jobs:
           git add scripts
           git commit -m "Update submodule to latest commit"
           git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
