@@ -18,9 +18,14 @@ echo "$ISSUE_URL"
 echo "$GH_PAT" | gh auth login --with-token
 
 # Fetch Issue Data
+echo "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues/${ISSUE_NUMBER}"
 curl "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues/${ISSUE_NUMBER}" > issue_details.json
+
 mkdir scripts
+echo "https://raw.githubusercontent.com/m-c-frank/justthoughts/scripts/llmjob.py"
 curl -o scripts/llmjob.py "https://raw.githubusercontent.com/m-c-frank/justthoughts/scripts/llmjob.py"
+
+cat scripts/llmjob.py
 
 pip install openai
 pip install langchain
