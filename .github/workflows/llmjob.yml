@@ -13,25 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'llmjob'
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-      
-      - name: Sanity check
-        run: cat ./scripts/llmjob.sh
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-
-      - name: Install Dependencies
-        run: pip install -r scripts/requirements.txt
-
-      - name: Execute Solver Script
+      - name: execute llmjob python script
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: bash ./scripts/llmjob.sh ${{ github.event.issue.number }}
+        run: |
+          curl -o llmjob.sh "https://raw.githubusercontent.com/m-c-frank/justthoughts/scripts/llmjob.sh"
+          bash llmjob.sh ${{ github.event.issue.number }}
 
